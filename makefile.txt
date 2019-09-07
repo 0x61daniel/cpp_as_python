@@ -1,0 +1,4 @@
+
+g++ split.cpp  -std=c++11 -fpic -shared -o libsplit.so
+
+g++ test.cpp -o test -std=c++11

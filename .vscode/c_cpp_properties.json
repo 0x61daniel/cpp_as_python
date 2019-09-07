@@ -1,0 +1,39 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "intelliSenseMode": "clang-x64",
+            "includePath": [
+                "${workspaceRoot}",
+                "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++",
+                "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/x86_64-w64-mingw32",
+                "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include/c++/backward",
+                "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include",
+                "D:/Program Files/llvm/include",
+                "D:/Program Files/llvm/x86_64-w64-mingw32/include",
+                "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include-fixed"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "__GNUC__=7",
+                "__cdecl=__attribute__((__cdecl__))"
+            ],
+            "browse": {
+                "path": [
+                    "D:/Program Files/llvm/x86_64-w64-mingw32/include",
+                    "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include",
+                    "D:/Program Files/llvm/lib/gcc/x86_64-w64-mingw32/7.1.0/include-fixed",
+                    "D:/Program Files/llvm/include/*",
+                    "${workspaceRoot}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "compilerPath": "D:\\MinGW\\mingw64\\bin\\gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
