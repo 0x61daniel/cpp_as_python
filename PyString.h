@@ -31,6 +31,11 @@ public:
     PyString(const char *s) : std::string(s) { };   //委派构造函数
     PyString(const std::string s) : std::string(s) { };
     
+    // operator std::string() const {
+    //     std::cout << "calc operator string" << std::endl;
+    //     return std::string(this->data());
+    // }
+
     bool isdigit();
     bool isalpha();
     bool isalnum();

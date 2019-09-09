@@ -14,6 +14,10 @@ int main(int argc, char const **argv)
     PyString str = "hello worlld";
     std::string cppStr = "hello worlld";
 
+
+    std::cout << str << endl;
+    string newStr = str;
+
     // cout << str.find("ll") << endl;
     // cout << str.rfind("ll", 0, 2) << endl;
     // cout << str.find("ll", 0, 4) << endl;
