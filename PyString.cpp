@@ -5,14 +5,14 @@
 std::vector<std::string> PyString::flds;
 
 
-inline int PyString::find(const std::string& subStr, int start, int end)
+inline int PyString::find_py(const std::string& subStr, int start, int end)
 {
 
     return start + this->__find(subStr, start, end, false);
 }
 
 
-inline int PyString::rfind(const std::string& subStr, int start, int end)
+inline int PyString::rfind_py(const std::string& subStr, int start, int end)
 {
     return start + this->__find(subStr, start, end, true);
 }
@@ -37,7 +37,7 @@ int PyString::__find(const std::string& subStr, int start, int end, bool rfind)
 
 inline bool PyString::startswith(std::string subStr, int start, int end)
 {
-    return this->find(subStr, start, end) == start? true:false;
+    return this->find_py(subStr, start, end) == start? true:false;
 }
 
 
@@ -50,12 +50,12 @@ bool PyString::endswith(std::string subStr, int start, int end)
         return false;
     }
  
-    int idx = this->rfind(subStr, start, end);
+    int idx = this->rfind_py(subStr, start, end);
     return ((idx+subStrSize) == end)? true: false;
 }
 
 
-int PyString::count(const std::string& subStr, int start, int end) 
+int PyString::count_py(const std::string& subStr, int start, int end) 
 {
     std::string str = this->data();
     int strSize = str.size();

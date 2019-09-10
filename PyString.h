@@ -43,9 +43,9 @@ public:
     bool startswith(std::string substr, int start=0, int end=INT_MAX);
     bool endswith(std::string substr, int start=0, int end=INT_MAX);
 
-    int find(const std::string& subStr, int start=0, int end=INT_MAX);
-    int rfind(const std::string& subStr, int start=0, int end=INT_MAX);
-    int count(const std::string& subStr, int start=0, int end=INT_MAX);
+    int find_py(const std::string& subStr, int start=0, int end=INT_MAX);
+    int rfind_py(const std::string& subStr, int start=0, int end=INT_MAX);
+    int count_py(const std::string& subStr, int start=0, int end=INT_MAX);
 
     template <typename... Types>
     PyString format(const Types&... args);

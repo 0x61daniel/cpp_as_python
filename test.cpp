@@ -18,16 +18,16 @@ int main(int argc, char const **argv)
     std::cout << str << endl;
     string newStr = str;
 
-    // cout << str.find("ll") << endl;
-    // cout << str.rfind("ll", 0, 2) << endl;
-    // cout << str.find("ll", 0, 4) << endl;
+    cout << str.find_py("ll") << endl;
+    cout << str.rfind_py("ll") << endl;
+    cout << str.rfind_py("ll", 0, 2) << endl;
+    cout << str.find_py("ll", 0, 4) << endl;
 
-    // cout << count(str, "o") << endl;
-    // cout << str.count("ol") << endl;
+    cout << str.count_py("l") << endl;
 
 
-    cout << str.startswith("ll",2) << endl;
-    cout << str.endswith("ll",0, -1) << endl;
+    // cout << str.startswith("ll",2) << endl;
+    // cout << str.endswith("ll",0, -1) << endl;
 
     // for(auto elem: range(0, 10, 4)) {
     //     cout << elem << " ";
