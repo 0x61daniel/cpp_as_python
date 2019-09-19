@@ -385,7 +385,6 @@ bool PyString::isspace()
 }
 
 
-inline bool PyString::__isdigit(const char ch)
 {
     return (48 <= ch && ch <= 57)? true: false;
 }
