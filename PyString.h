@@ -11,8 +11,6 @@
 #include <sstream>
 #include <algorithm>
 
-using namespace std;
-
 
 struct VideoInfo
 {
@@ -76,7 +74,7 @@ private:
 };
 
 
-
+/* 
 template <class T>
 void print(const std::vector<T>& v)
 {
@@ -110,7 +108,7 @@ std::list<int> range(const int first, const int end, const int step=1);
 
 
 
-
+*/
 
 #endif
 

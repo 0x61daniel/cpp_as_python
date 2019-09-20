@@ -400,8 +400,8 @@ inline bool PyString::__isalpha(const char ch)
 
 
 
-
-
+/*
+ 
 std::list<int> range(int end)
 {
     return range(0, end);
@@ -428,7 +428,7 @@ std::list<int> range(const int first, const int end, const int step)
 }
 
 
-
+*/
 
 
 
