@@ -5,14 +5,14 @@
 std::vector<std::string> PyString::flds;
 
 
-inline int PyString::find_py(const std::string& subStr, int start, int end)
+inline int PyString::py_find(const std::string& subStr, int start, int end)
 {
 
     return start + this->__find(subStr, start, end, false);
 }
 
 
-inline int PyString::rfind_py(const std::string& subStr, int start, int end)
+inline int PyString::py_rfind(const std::string& subStr, int start, int end)
 {
     return start + this->__find(subStr, start, end, true);
 }
@@ -35,13 +35,13 @@ int PyString::__find(const std::string& subStr, int start, int end, bool rfind)
 }
 
 
-inline bool PyString::startswith(std::string subStr, int start, int end)
+inline bool PyString::py_startswith(std::string subStr, int start, int end)
 {
-    return this->find_py(subStr, start, end) == start? true:false;
+    return this->py_find(subStr, start, end) == start? true:false;
 }
 
 
-bool PyString::endswith(std::string subStr, int start, int end)
+bool PyString::py_endswith(std::string subStr, int start, int end)
 {
     std::string str = this->data();
     int strSize = str.size();
@@ -50,12 +50,12 @@ bool PyString::endswith(std::string subStr, int start, int end)
         return false;
     }
  
-    int idx = this->rfind_py(subStr, start, end);
+    int idx = this->py_rfind(subStr, start, end);
     return ((idx+subStrSize) == end)? true: false;
 }
 
 
-int PyString::count_py(const std::string& subStr, int start, int end) 
+int PyString::py_count(const std::string& subStr, int start, int end) 
 {
     std::string str = this->data();
     int strSize = str.size();
@@ -100,7 +100,7 @@ int PyString::ConvertInterval(const int& strSize, const int& subStrSize, int& st
 }
 
 
-inline PyString PyString::strip(const std::string str)
+inline PyString PyString::py_strip(const std::string str)
 {
     // std::string str = this->data();
     // int i = 0;
@@ -114,7 +114,7 @@ inline PyString PyString::strip(const std::string str)
 }
 
 
-inline PyString PyString::lstrip(const std::string str)
+inline PyString PyString::py_lstrip(const std::string str)
 {
     // std::string str = this->data();
     // //除去str两端的ch字符
@@ -126,7 +126,7 @@ inline PyString PyString::lstrip(const std::string str)
 }
 
 
-inline PyString PyString::rstrip(const std::string str)
+inline PyString PyString::py_rstrip(const std::string str)
 {
     // std::string str = this->data();
     // //除去str两端的ch字符
@@ -138,23 +138,23 @@ inline PyString PyString::rstrip(const std::string str)
 }
 
 
-PyString PyString::__strip(const std::string ch, const bool lstrip, const bool rstrip)
+PyString PyString::__strip(const std::string pattern, const bool lstrip, const bool rstrip)
 {
     std::string str = this->data();
     int i = 0, j = str.size()-1;
     if (lstrip) {
-        while (std::string::npos != ch.find(str[i]))   // while (in(str[i], ch))
+        while (std::string::npos != pattern.find(str[i]))   // while (in(str[i], ch))
             i++;
     }
     if (rstrip) {
-        while (std::string::npos != ch.find(str[j]))
+        while (std::string::npos != pattern.find(str[j]))
             j--;
     }
     return PyString(str.substr(i, j+1 -i ));
 }
 
 
-std::vector<std::string>& PyString::split(const char delim, int maxsplit, const int rep)
+std::vector<std::string>& PyString::py_split(const char delim, int maxsplit, const int rep)
 {
     if (0 == maxsplit){
         this->flds.push_back(this->data());
@@ -170,7 +170,7 @@ std::vector<std::string>& PyString::split(const char delim, int maxsplit, const 
 }
 
 
-std::vector<std::string>& PyString::rsplit(const char delim, int maxsplit, const int rep)
+std::vector<std::string>& PyString::py_rsplit(const char delim, int maxsplit, const int rep)
 {
     if (0 == maxsplit){
         this->flds.push_back(this->data());
@@ -254,7 +254,7 @@ bool PyString::__split(T& pIndex,  T& pEnd, const char& delim, int maxsplit, con
 
 
 
-PyString PyString::replace_py(const std::string sourceStr, const std::string targetStr, int iMaxReplace)
+PyString PyString::py_replace(const std::string sourceStr, const std::string targetStr, int iMaxReplace)
 {
     PyString sResult = this->data();
 
@@ -275,7 +275,7 @@ PyString PyString::replace_py(const std::string sourceStr, const std::string tar
 
 
 template <typename... Types>
-PyString PyString::format(const Types&... args)
+PyString PyString::py_format(const Types&... args)
 {
     std::string fmt_spec = this->data();
     std::ostringstream builder;
@@ -326,7 +326,7 @@ void PyString::BuildFormatString(std::ostringstream& builder, const std::string&
 
 
 
-bool PyString::isdigit()
+bool PyString::py_isdigit()
 {
     std::string str = this->data();
     if (0 == str.size()) {
@@ -341,7 +341,7 @@ bool PyString::isdigit()
 }
 
 
-bool PyString::isalpha()
+bool PyString::py_isalpha()
 {
     std::string str = this->data();
     if (0 == str.size()) {
@@ -355,7 +355,7 @@ bool PyString::isalpha()
     return true;
 }
 
-bool PyString::isalnum()
+bool PyString::py_isalnum()
 {
     std::string str = this->data();
     if (0 == str.size()) {
@@ -370,7 +370,7 @@ bool PyString::isalnum()
 }
 
 
-bool PyString::isspace()
+bool PyString::py_isspace()
 {
     std::string str = this->data();
     if (0 == str.size()) {
@@ -385,6 +385,7 @@ bool PyString::isspace()
 }
 
 
+inline bool PyString::__isdigit(const char ch)
 {
     return (48 <= ch && ch <= 57)? true: false;
 }

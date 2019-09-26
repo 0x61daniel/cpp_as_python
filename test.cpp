@@ -11,41 +11,43 @@ using namespace std;
 int main(int argc, char const **argv)
 {
 
-    PyString str = "hello worlld";
-    std::string cppStr = "hello worlld";
-
-
-    std::cout << str << endl;
-    string newStr = str;
-
-    cout << str.find_py("ll") << endl;
-    cout << str.rfind_py("ll") << endl;
-    cout << str.rfind_py("ll", 0, 2) << endl;
-    cout << str.find_py("ll", 0, 4) << endl;
-
-    cout << str.count_py("l") << endl;
-
-
-    // cout << str.startswith("ll",2) << endl;
-    // cout << str.endswith("ll",0, -1) << endl;
 
     // for(auto elem: range(0, 10, 4)) {
-    //     cout << elem << " ";
-    // }
+    //         cout << elem << " ";
+    //     }
 
 
 
-   
+
+    PyString str = "hello worlld";
+    // std::string cppStr = "hello worlld";
+    print(str.py_split('l'));
+
+    // std::cout << str << endl;
+    // string newStr = str;
+
+    // cout << str.py_find("ll") << endl;
+    // cout << str.py_rfind("ll") << endl;
+    // cout << str.py_rfind("ll", 0, 2) << endl;
+    // cout << str.py_find("ll", 0, 4) << endl;
+
+    // cout << str.py_count("l") << endl;
+
+
+    // cout << str.py_startswith("ll",2) << endl;
+    // cout << str.py_endswith("ll",0, -1) << endl;
+
+    
 
 
 
-    // 不支持占位符标识{0} {1}
+    //不支持占位符标识{0} {1}
     // cout << FormatString(" world!", "hello", 3.14) << endl;
     // cout << FormatString("{} world!", "hello", 10) << endl;
     // cout << FormatString("{} world! {}", "hello", "true") << endl;
     // cout << FormatString("{} world! PI is {}", "hello", 3.14) << endl;
-    // cout << PyString("hello {}").format("world") << endl;
-    // cout << PyString("hello {} {}").format("world", 3.15) << endl;
+    // cout << PyString("hello {}").py_format("world") << endl;
+    // cout << PyString("hello {} {}").py_format("world", 3.15) << endl;
 
 
 
@@ -65,9 +67,9 @@ int main(int argc, char const **argv)
     // cout << str << endl;
 
     // PyString str = "hahchhhhhhh";
-    // cout << str.lstrip("h") << endl;
-    // cout << str.rstrip("h") << endl;
-    // cout << str.strip("h") << endl;
+    // cout << str.py_lstrip("h") << endl;
+    // cout << str.py_rstrip("h") << endl;
+    // cout << str.py_strip("h") << endl;
     // cout << str << endl;
 
     // std::string sr = str;
@@ -83,3 +85,34 @@ int main(int argc, char const **argv)
 
     return 0;
 }
+
+
+
+
+
+/*
+
+std::vector<std::string> splitWithStl(const std::string &str,const std::string &pattern)
+    	    {
+		std::vector<std::string> resVec;
+        	if ("" == str)
+        	{
+            		return resVec;
+        	}
+
+        	std::string strs = str + pattern;
+
+        	int pos = strs.find(pattern);
+        	int size = strs.size();
+
+        	while (pos != std::string::npos)
+        	{
+	    		std::string x = strs.substr(0,pos);
+            		resVec.push_back(x);
+            		strs = strs.substr(pos+1,size);
+            		pos = strs.find(pattern);
+        	}
+		return resVec;
+	    }
+
+*/

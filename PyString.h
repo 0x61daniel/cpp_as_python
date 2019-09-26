@@ -34,26 +34,26 @@ public:
     //     return std::string(this->data());
     // }
 
-    bool isdigit();
-    bool isalpha();
-    bool isalnum();
-    bool isspace();
-    bool startswith(std::string substr, int start=0, int end=INT_MAX);
-    bool endswith(std::string substr, int start=0, int end=INT_MAX);
+    bool py_isdigit();
+    bool py_isalpha();
+    bool py_isalnum();
+    bool py_isspace();
+    bool py_startswith(std::string substr, int start=0, int end=INT_MAX);
+    bool py_endswith(std::string substr, int start=0, int end=INT_MAX);
 
-    int find_py(const std::string& subStr, int start=0, int end=INT_MAX);
-    int rfind_py(const std::string& subStr, int start=0, int end=INT_MAX);
-    int count_py(const std::string& subStr, int start=0, int end=INT_MAX);
+    int py_find(const std::string& subStr, int start=0, int end=INT_MAX);
+    int py_rfind(const std::string& subStr, int start=0, int end=INT_MAX);
+    int py_count(const std::string& subStr, int start=0, int end=INT_MAX);
 
     template <typename... Types>
-    PyString format(const Types&... args);
-    PyString strip(const std::string str);
-    PyString lstrip(const std::string str);
-    PyString rstrip(const std::string str);
-    PyString replace_py(const std::string sourceStr, const std::string targetStr, int iMaxReplace=-1);
+    PyString py_format(const Types&... args);
+    PyString py_strip(const std::string str);
+    PyString py_lstrip(const std::string str);
+    PyString py_rstrip(const std::string str);
+    PyString py_replace(const std::string sourceStr, const std::string targetStr, int iMaxReplace=-1);
 
-    std::vector<std::string>& split(const char delim, int maxsplit=-1, const int rep=false);
-    std::vector<std::string>& rsplit(const char delim, int maxsplit=-1, const int rep=false);
+    std::vector<std::string>& py_split(const char delim, int maxsplit=-1, const int rep=false);
+    std::vector<std::string>& py_rsplit(const char delim, int maxsplit=-1, const int rep=false);
 private:
     static std::vector<std::string> flds;
 
@@ -70,10 +70,21 @@ private:
                            std::string::size_type idx, const T& first, const Types&... args);
     void BuildFormatString(std::ostringstream& builder, const std::string& fmt_spec, std::string::size_type idx);
     
-    PyString __strip(const std::string ch, const bool lstrip=false, const bool rstrip=false);
+    PyString __strip(const std::string pattern, const bool lstrip=false, const bool rstrip=false);
 };
 
 
+
+
+template <class T>
+void print(const std::vector<T>& v)
+{
+    std::cout << '[';
+    for(auto val: v){
+        std::cout << '\'' <<  val << "',";
+    }
+    std::cout  << ']' << std::endl;
+}
 /* 
 template <class T>
 void print(const std::vector<T>& v)
