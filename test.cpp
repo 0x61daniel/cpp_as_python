@@ -8,111 +8,50 @@
 using namespace std;
 
 
-int main(int argc, char const **argv)
+
+std::vector<std::string> splitWithStl(const std::string &str,const std::string &pattern, int maxsplit=-1)
 {
+    std::vector<std::string> resVec;
+    if ("" == str) {
+        return resVec;
+    }
 
+    std::string strs = str + pattern;
 
-    // for(auto elem: range(0, 10, 4)) {
-    //         cout << elem << " ";
-    //     }
+    int patSize = pattern.size();
+    // int pos = strs.find(pattern);
+    int pos = 0;
 
-
-
-
-    PyString str = "hello worlld";
-    // std::string cppStr = "hello worlld";
-    print(str.py_split('l'));
-
-    // std::cout << str << endl;
-    // string newStr = str;
-
-    // cout << str.py_find("ll") << endl;
-    // cout << str.py_rfind("ll") << endl;
-    // cout << str.py_rfind("ll", 0, 2) << endl;
-    // cout << str.py_find("ll", 0, 4) << endl;
-
-    // cout << str.py_count("l") << endl;
-
-
-    // cout << str.py_startswith("ll",2) << endl;
-    // cout << str.py_endswith("ll",0, -1) << endl;
-
+    do
+    {
+        pos = strs.find(pattern);
+        std::string x = strs.substr(0,pos);
+        resVec.push_back(x);
+        if (pos+patSize >= strs.size()) break;
+        strs = strs.substr(pos+patSize);
+        maxsplit -= 1;
+    } while (pos != std::string::npos && maxsplit != 0);
     
 
-
-
-    //不支持占位符标识{0} {1}
-    // cout << FormatString(" world!", "hello", 3.14) << endl;
-    // cout << FormatString("{} world!", "hello", 10) << endl;
-    // cout << FormatString("{} world! {}", "hello", "true") << endl;
-    // cout << FormatString("{} world! PI is {}", "hello", 3.14) << endl;
-    // cout << PyString("hello {}").py_format("world") << endl;
-    // cout << PyString("hello {} {}").py_format("world", 3.15) << endl;
-
-
-
-
-
-    // cout << str.replace(str.begin(), str.begin() + 3, 4, 'a') << endl;
-    // cout << str.replace(0, 5, "A") << endl;
-    // cout << str.replace_py("l", "A") << endl;
-
-
-
-    // cout << isalpha('c') << endl;
-    // cout  << str.isalpha() << endl;
-    // cout  << str.isdigit() << endl;
-    // cout  << str.isalnum() << endl;
-    // cout  << str.isspace() << endl;
-    // cout << str << endl;
-
-    // PyString str = "hahchhhhhhh";
-    // cout << str.py_lstrip("h") << endl;
-    // cout << str.py_rstrip("h") << endl;
-    // cout << str.py_strip("h") << endl;
-    // cout << str << endl;
-
-    // std::string sr = str;
-    // cout << sr << endl;
-
-    // auto rev = str.split('h');
-    // cout << rev.size() << endl;
-    // // print(rev);
-    // for(auto elem: rev) {
-
-    //     cout << ":" << elem << endl;
+    // while (pos != std::string::npos && maxsplit != 0) {
+    //     std::string x = strs.substr(0,pos);
+    //     resVec.push_back(x);
+    //     strs = strs.substr(pos+1);
+    //     pos = strs.find(pattern);
+    //     maxsplit -= 1;
     // }
 
-    return 0;
+    // helloel
+    if (0 == maxsplit) {
+        resVec.push_back(strs.substr(0, strs.size()-pattern.size()));
+    }
+    return resVec;
 }
 
 
 
-
-
-/*
-
-std::vector<std::string> splitWithStl(const std::string &str,const std::string &pattern)
-    	    {
-		std::vector<std::string> resVec;
-        	if ("" == str)
-        	{
-            		return resVec;
-        	}
-
-        	std::string strs = str + pattern;
-
-        	int pos = strs.find(pattern);
-        	int size = strs.size();
-
-        	while (pos != std::string::npos)
-        	{
-	    		std::string x = strs.substr(0,pos);
-            		resVec.push_back(x);
-            		strs = strs.substr(pos+1,size);
-            		pos = strs.find(pattern);
-        	}
-		return resVec;
-	    }
-
-*/
+int main(int argc, char const **argv)
+{   
+    print(splitWithStl("hello", "el", 6));
+    return 0;
+}
