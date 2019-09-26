@@ -41,7 +41,7 @@ std::vector<std::string> splitWithStl(const std::string &str,const std::string &
     //     maxsplit -= 1;
     // }
 
-    // helloel
+ 
     if (0 == maxsplit) {
         resVec.push_back(strs.substr(0, strs.size()-pattern.size()));
     }
