@@ -31,8 +31,8 @@ public:
     PyString py_rstrip(const std::string str);
     PyString py_replace(const std::string sourceStr, const std::string targetStr, int iMaxReplace=-1);
 
-    std::vector<std::string>& py_split(const char delim, int maxsplit=-1, const int rep=false);
-    std::vector<std::string>& py_rsplit(const char delim, int maxsplit=-1, const int rep=false);
+    std::vector<std::string> py_split(const char delim, int maxsplit=-1, const int rep=false);
+    std::vector<std::string> py_rsplit(const char delim, int maxsplit=-1, const int rep=false);
 
 
 private:

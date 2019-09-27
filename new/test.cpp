@@ -14,12 +14,11 @@ class PyString::Impl
 {
     public:
         std::vector<std::string> flds;
-        std::string data;
-
-    void getString(std::string& str) {this->data = str;}
+        int iii;
 
     // private:
-    int ConvertInterval(const int& strSize, const int& subStrSize, int& start, int& end) {
+    int ConvertInterval(const int& strSize, const int& subStrSize, int& start, int& end)
+    {
         if (abs(start) > strSize) {               //开始索引大于字符串长度
             return -1;
         }
@@ -44,14 +43,30 @@ class PyString::Impl
     }
 
 
-    int __find(const std::string& subStr, int start, int end, bool rfind);
+    int __find(const std::string& str, const std::string& subStr, int start, int end, bool rfind)
+    {
+        // std::string str = this->data();
+        int strSize = str.size();
+        int subStrSize = subStr.size();
+        if (this->ConvertInterval(strSize, subStrSize, start, end) == -1) {
+            return -1;
+        }
+
+        std::string tempStr = str.substr(start, (end-start));
+        if (rfind) {
+            return tempStr.rfind(subStr);
+        }
+        return tempStr.find(subStr);
+    }
+
 
 
     bool __isdigit(const char ch) { return (48 <= ch && ch <= 57)? true: false;}
     bool __isalpha(const char ch) { return ((97 <= ch && ch <= 122) || (65 <= ch && ch <= 90))? true: false;}
-    PyString __strip(const std::string pattern, const bool lstrip=false, const bool rstrip=false) {
+    PyString __strip(const std::string& str, const std::string pattern, const bool lstrip=false, const bool rstrip=false)
+    {
 
-        std::string str = this->data;
+        // std::string str = this->data();
         int i = 0, j = str.size()-1;
         if (lstrip) {
             while (std::string::npos != pattern.find(str[i]))   // while (in(str[i], ch))
@@ -67,7 +82,8 @@ class PyString::Impl
 
 
 
-    void BuildFormatString(std::ostringstream& builder, const std::string& fmt_spec, std::string::size_type idx) {
+    void BuildFormatString(std::ostringstream& builder, const std::string& fmt_spec, std::string::size_type idx)
+    {
         auto count = fmt_spec.size() - idx;
         if (count <= 0) {
             return;
@@ -78,27 +94,28 @@ class PyString::Impl
 
     template <typename T, typename... Types>
     void BuildFormatString(std::ostringstream& builder, const std::string& fmt_spec,
-                           std::string::size_type idx, const T& first, const Types&... args) {
+                           std::string::size_type idx, const T& first, const Types&... args)
+    {
         auto pos = fmt_spec.find_first_of("{}", idx);
         if (pos == std::string::npos) {
-            return impl_->BuildFormatString(builder, fmt_spec, idx);
+            return this->BuildFormatString(builder, fmt_spec, idx);
         }
 
         builder.write(fmt_spec.data() + idx, pos - idx);
         builder << first;
         //处理完一个参数之后，通过递归的方式处理下一个参数
-        impl_->BuildFormatString(builder, fmt_spec, pos + 2, args...);
+        this->BuildFormatString(builder, fmt_spec, pos + 2, args...);
     }
 
     template<typename T>
-    bool __split(T& pIndex,  T& pEnd, const char& delim, int maxsplit, const bool rsplit, const bool rep)
+    std::vector<std::string> __split(const std::string& str, T& pIndex,  T& pEnd, const char& delim, int maxsplit, const bool rsplit, const bool rep)
     {
-        if (!this->flds.empty()) {
-            this->flds.clear();
-        }
-
+        // if (!this->flds.empty()) {
+        //     this->flds.clear();
+        // }
+        std::vector<std::string> resVec;
         int i = 0;
-        std::string str = this->data;
+        // std::string str = this->data();
         std::string buf;
         // if (rsplit) {
         //     auto pIndex = str.rbegin();
@@ -116,14 +133,14 @@ class PyString::Impl
                 if (rsplit){
                     reverse(buf.begin(),buf.end());
                 }
-                this->flds.push_back(buf);
+                resVec.push_back(buf);
                 buf = "";
                 maxsplit -= 1;
             } else if (buf.length() > 0) {
                 if (rsplit) {
                     reverse(buf.begin(),buf.end());
                 }
-                this->flds.push_back(buf);
+                resVec.push_back(buf);
                 buf = "";
                 maxsplit -= 1;
             }
@@ -134,15 +151,15 @@ class PyString::Impl
 
         if (i < str.length()) {
             if (rsplit) {
-                this->flds.push_back(str.substr(0, str.length()-i));
+                resVec.push_back(str.substr(0, str.length()-i));
             } else {
-                this->flds.push_back(str.substr(i));
+                resVec.push_back(str.substr(i));
             }
         } else if (!buf.empty()) {
             if (rsplit) {
                 reverse(buf.begin(),buf.end());
             }
-            this->flds.push_back(buf);
+            resVec.push_back(buf);
         } else {
             int index = 0;
             if (rsplit) {
@@ -152,7 +169,7 @@ class PyString::Impl
                 this->flds.push_back("");
             }
         }
-        return true;
+        return resVec;
     }
 };
 
@@ -167,31 +184,18 @@ class PyString::Impl
 inline int PyString::py_find(const std::string& subStr, int start, int end)
 {
 
-    return start + this->impl_->__find(subStr, start, end, false);
+
+    return start + this->impl_->__find(this->data(), subStr, start, end, false);
 }
 
 
 inline int PyString::py_rfind(const std::string& subStr, int start, int end)
 {
-    return start +  this->impl_->__find(subStr, start, end, true);
+    return start +  this->impl_->__find(this->data(), subStr, start, end, true);
 }
 
 
-// int PyString::__find(const std::string& subStr, int start, int end, bool rfind)
-// {
-//     std::string str = this->data();
-//     int strSize = str.size();
-//     int subStrSize = subStr.size();
-//     if (this->ConvertInterval(strSize, subStrSize, start, end) == -1) {
-//         return -1;
-//     }
 
-//     std::string tempStr = str.substr(start, (end-start));
-//     if (rfind) {
-//         return tempStr.rfind(subStr);
-//     }
-//     return tempStr.find(subStr);
-// }
 
 
 inline bool PyString::py_startswith(std::string subStr, int start, int end)
@@ -246,7 +250,8 @@ inline PyString PyString::py_strip(const std::string str)
     // while (std::string::npos != ch.find(str[j]))   //
     //     j--;
     // return PyString(str.substr(i, j+1 -i ));
-    return this->impl_->__strip(str, true, true);
+    // std::cout << "::::" << this->impl_->iii << std::endl;
+    return this->impl_->__strip(this->data(), str, true, true);
 }
 
 
@@ -258,7 +263,7 @@ inline PyString PyString::py_lstrip(const std::string str)
     // while (std::string::npos != ch.find(str[i]))   // while (in(str[i], ch))
     //     i++;
     // return PyString(str.substr(i, str.size() ));
-    return this->impl_->__strip(str, true);
+    return this->impl_->__strip(this->data(), str, true);
 }
 
 
@@ -270,42 +275,47 @@ inline PyString PyString::py_rstrip(const std::string str)
     // while (std::string::npos != ch.find(str[j]))   // while (in(str[i], ch))
     //     j--;
     // return PyString(str.substr(0, j+1 ));
-    return this->impl_->__strip(str, false, true);
+    return this->impl_->__strip(this->data(), str, false, true);
 }
 
 
 
 
-std::vector<std::string>& PyString::py_split(const char delim, int maxsplit, const int rep)
+std::vector<std::string> PyString::py_split(const char delim, int maxsplit, const int rep)
 {
-    if (0 == maxsplit){
-        this->impl_->flds.push_back(this->data());
-        return this->impl_->flds;
-    }
+    std::vector<std::string> resVec;
 
     std::string str = this->data();
+    if (0 == maxsplit) {
+        resVec.push_back(str);
+        return resVec;
+    }
+
     auto pIndex = str.begin();
     auto pEnd = str.end();
-    this->impl_->__split(pIndex,  pEnd, delim, maxsplit, false, rep);
+    resVec = this->impl_->__split(str, pIndex,  pEnd, delim, maxsplit, false, rep);
+    // return this->impl_->flds;
 
-    return this->impl_->flds;
+    return resVec;
 }
 
 
-std::vector<std::string>& PyString::py_rsplit(const char delim, int maxsplit, const int rep)
+std::vector<std::string> PyString::py_rsplit(const char delim, int maxsplit, const int rep)
 {
-    if (0 == maxsplit){
-        this->impl_->flds.push_back(this->data());
-        return impl_->flds;
-    }
+    std::vector<std::string> resVec;
 
     std::string str = this->data();
+    if (0 == maxsplit) {
+        resVec.push_back(str);
+        return resVec;
+    }
+
     auto pIndex = str.rbegin();
     auto pEnd = str.rend();
-    this->impl_->__split(pIndex,  pEnd, delim, maxsplit, true, rep);
+    resVec = this->impl_->__split(str, pIndex,  pEnd, delim, maxsplit, true, rep);
 
-    reverse(this->impl_->flds.begin(), this->impl_->flds.end());
-    return this->impl_->flds;
+    reverse(resVec.begin(), resVec.end());
+    return resVec;
 }
 
 
@@ -432,13 +442,25 @@ bool PyString::py_isspace()
 //     return PyString(str.substr(i, j+1 -i ));
 // }
 
+template <class T>
+void print(const std::vector<T>& v)
+{
+    std::cout << '[';
+    for(auto val: v){
+        std::cout << '\'' <<  val << "',";
+    }
+    std::cout  << ']' << std::endl;
+}
 
-
-
+using namespace std;
 
 int main(int argc, char const *argv[])
 {
-
+    PyString str("hello world");
+    print(str.py_split('A'));
+    // cout << str.py_strip("h") << endl;
+    // // cout << str.py_split('l') << endl;
+    // cout << str << endl;
     return 0;
 }
 
