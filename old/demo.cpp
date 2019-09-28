@@ -22,7 +22,7 @@ int main(int argc, char const **argv)
 
     PyString str = "hello worlld";
     // std::string cppStr = "hello worlld";
-    print(str.py_split("ll"));
+    print(str.py_split('l'));
 
     // std::cout << str << endl;
     // string newStr = str;
@@ -38,7 +38,7 @@ int main(int argc, char const **argv)
     // cout << str.py_startswith("ll",2) << endl;
     // cout << str.py_endswith("ll",0, -1) << endl;
 
-    
+
 
 
 
