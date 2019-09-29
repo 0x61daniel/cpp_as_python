@@ -381,15 +381,6 @@ std::vector<std::string> PyString::py_rsplit(const std::string& pattern, int max
 
 
 
-template <class T>
-void print(const std::vector<T>& v)
-{
-    std::cout << '[';
-    for(auto val: v){
-        std::cout << '\'' <<  val << "',";
-    }
-    std::cout  << ']' << std::endl;
-}
 
 // using namespace std;
 

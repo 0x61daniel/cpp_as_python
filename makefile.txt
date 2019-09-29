@@ -1,3 +1,0 @@
-libPyString.so: PyString.cpp    
-    g++ PyString.cpp  -std=c++11 -fpic -shared -o libPyString.so
-

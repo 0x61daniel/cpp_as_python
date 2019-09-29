@@ -20,12 +20,8 @@ int main(int argc, char const **argv)
 
 
 
-    PyString str = "hello worlld";
-    // std::string cppStr = "hello worlld";
-    print(str.py_split("ll"));
-
-    // std::cout << str << endl;
-    // string newStr = str;
+    PyString str = "hello world";
+    print(str.py_split("ll", 1));
 
     // cout << str.py_find("ll") << endl;
     // cout << str.py_rfind("ll") << endl;
@@ -47,7 +43,8 @@ int main(int argc, char const **argv)
     // cout << FormatString("{} world!", "hello", 10) << endl;
     // cout << FormatString("{} world! {}", "hello", "true") << endl;
     // cout << FormatString("{} world! PI is {}", "hello", 3.14) << endl;
-    // cout << PyString("hello {}").py_format("world") << endl;
+    std::string st = "ll";
+    cout << PyString("hello {}").py_format(st) << endl;
     // cout << PyString("hello {} {}").py_format("world", 3.15) << endl;
 
 

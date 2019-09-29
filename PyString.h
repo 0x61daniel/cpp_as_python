@@ -4,8 +4,7 @@
 #include <climits>
 #include <vector>
 #include <memory>
-
-
+#include <iostream>
 
 
 class PyString : public std::string
@@ -47,6 +46,16 @@ private:
     // void getString() {PyString::Impl::getString(this->data());}
 };
 
+
+template <class T>
+void print(const std::vector<T>& v)
+{
+    std::cout << '[';
+    for(auto val: v){
+        std::cout << '\'' <<  val << "',";
+    }
+    std::cout  << ']' << std::endl;
+}
 
 
 #endif
