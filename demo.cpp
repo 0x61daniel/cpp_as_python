@@ -8,7 +8,6 @@
 using namespace std;
 
 
-
 int main(int argc, char const **argv)
 {
 
@@ -43,26 +42,25 @@ int main(int argc, char const **argv)
     // cout << FormatString("{} world!", "hello", 10) << endl;
     // cout << FormatString("{} world! {}", "hello", "true") << endl;
     // cout << FormatString("{} world! PI is {}", "hello", 3.14) << endl;
-    std::string st = "ll";
-    cout << PyString("hello {}").py_format(st) << endl;
+    // std::string st = "ll";
+    // cout << PyString("hello {}").py_format(st) << endl;
     // cout << PyString("hello {} {}").py_format("world", 3.15) << endl;
 
 
 
 
 
-    // cout << str.replace(str.begin(), str.begin() + 3, 4, 'a') << endl;
-    // cout << str.replace(0, 5, "A") << endl;
-    // cout << str.replace_py("l", "A") << endl;
+    cout << str.replace(str.begin(), str.begin() + 3, 4, 'a') << endl;
+    cout << str.replace(0, 5, "A") << endl;
+    cout << str.py_replace("l", "A") << endl;
+    
 
-
-
-    // cout << isalpha('c') << endl;
-    // cout  << str.isalpha() << endl;
-    // cout  << str.isdigit() << endl;
-    // cout  << str.isalnum() << endl;
-    // cout  << str.isspace() << endl;
-    // cout << str << endl;
+    cout << isalpha('c') << endl;
+    cout  << str.py_isalpha() << endl;
+    cout  << str.py_isdigit() << endl;
+    cout  << str.py_isalnum() << endl;
+    cout  << str.py_isspace() << endl;
+    cout << str << endl;
 
     // PyString str = "hahchhhhhhh";
     // cout << str.py_lstrip("h") << endl;
