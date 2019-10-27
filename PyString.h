@@ -15,8 +15,6 @@ public:
     ~PyString();
     PyString(const char *s);
     PyString(const std::string& s);
-    // PyString(const char *s) : std::string(s),impl_(std::make_shared<Impl>()) {};   //委派构造函数
-    // PyString(const std::string& s) : std::string(s) {};
     bool py_isdigit();
     bool py_isalpha();
     bool py_isalnum();

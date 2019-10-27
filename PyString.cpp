@@ -124,13 +124,14 @@ std::vector<std::string> PyString::Impl::__split(const std::string& str, const s
         return resVec;
     }
 
+    std::string::size_type patSize = pattern.size();
     if(rsplit){
         std::string::size_type index = 0;
         std::string::size_type last = str.length();
         while(std::string::npos != index and maxsplit != 0){
             index = str.rfind(pattern, last);
             resVec.push_back(str.substr(index+1, last-index));
-            last = index - pattern.size();
+            last = index - patSize;
             maxsplit -= 1;
         }
         if(std::string::npos != index){
@@ -142,7 +143,7 @@ std::vector<std::string> PyString::Impl::__split(const std::string& str, const s
         while(std::string::npos != index and maxsplit != 0)
         {
             resVec.push_back(str.substr(last, index-last));
-            last = index + pattern.size();
+            last = index + patSize;
             index = str.find(pattern, last);
             maxsplit -= 1;
         }
