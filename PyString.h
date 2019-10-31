@@ -15,26 +15,41 @@ public:
     ~PyString();
     PyString(const char *s);
     PyString(const std::string& s);
-    bool py_isdigit();
-    bool py_isalpha();
-    bool py_isalnum();
-    bool py_isspace();
-    bool py_startswith(std::string substr, int start=0, int end=INT_MAX);
-    bool py_endswith(std::string substr, int start=0, int end=INT_MAX);
+    bool py_isdigit() const;
+    bool py_isalpha() const;
+    bool py_isalnum() const;
+    bool py_isspace() const;
+    bool py_endswith(const char& chr, int start=0, int end=INT_MAX) const;
+    bool py_startswith(const char& chr, int start=0, int end=INT_MAX) const;
+    bool py_startswith(std::string substr, int start=0, int end=INT_MAX) const;
+    bool py_endswith(std::string substr, int start=0, int end=INT_MAX) const;
 
-    int py_count(const std::string& subStr, int start=0, int end=INT_MAX);
-    int py_find(const std::string& subStr, int start=0, int end=INT_MAX);
-    int py_rfind(const std::string& subStr, int start=0, int end=INT_MAX);
+
+    int py_find(const char& chr, int start=0, int end=INT_MAX) const;
+    int py_rfind(const char& chr, int start=0, int end=INT_MAX) const;
+    int py_count(const char& chr, int start=0, int end=INT_MAX) const;
+    int py_count(const std::string& subStr, int start=0, int end=INT_MAX) const;
+    int py_find(const std::string& subStr, int start=0, int end=INT_MAX) const;
+    int py_rfind(const std::string& subStr, int start=0, int end=INT_MAX) const;
 
     template <typename... Types>
     PyString py_format(const Types&... args);
-    PyString py_strip(const std::string str);
-    PyString py_lstrip(const std::string str);
-    PyString py_rstrip(const std::string str);
-    PyString py_replace(const std::string sourceStr, const std::string targetStr, int iMaxReplace=-1);
 
-    std::vector<std::string> py_split(const std::string& pattern, int maxsplit=-1);
-    std::vector<std::string> py_rsplit(const std::string& pattern, int maxsplit=-1);
+    PyString py_strip(const char& chr);
+    PyString py_lstrip(const char& chr);
+    PyString py_rstrip(const char& chr);
+
+    PyString py_strip(const std::string& str);
+    PyString py_lstrip(const std::string& str);
+    PyString py_rstrip(const std::string& str);
+
+    PyString py_replace(const char& sourceChr, const char& targetChr, int iMaxReplace=-1) const;
+    PyString py_replace(const std::string& sourceStr, const std::string& targetStr, int iMaxReplace=-1) const;
+
+    std::vector<std::string> py_split(const char& chr, int maxsplit=-1) const;
+    std::vector<std::string> py_rsplit(const char& chr, int maxsplit=-1) const;
+    std::vector<std::string> py_split(const std::string& pattern, int maxsplit=-1) const;
+    std::vector<std::string> py_rsplit(const std::string& pattern, int maxsplit=-1) const;
 
 
 private:
@@ -44,16 +59,6 @@ private:
     // void getString() {PyString::Impl::getString(this->data());}
 };
 
-
-template <class T>
-void print(const std::vector<T>& v)
-{
-    std::cout << '[';
-    for(auto val: v){
-        std::cout << '\'' <<  val << "',";
-    }
-    std::cout  << ']' << std::endl;
-}
 
 
 #endif

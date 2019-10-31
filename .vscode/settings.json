@@ -40,12 +40,12 @@
         //chcp命令查看cmd的编码设置  (GBK2312 -> 936, UTF-8 -> 65001)   chcp 65001
 
         // // win10 设置
-        "c": "cd $dir && clang $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c11 && ./build/$fileNameWithoutExt.exe",
-        "cpp": "cd $dir && clang++ $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c++1z && ./build/$fileNameWithoutExt.exe"
+        // "c": "cd $dir && clang $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c11 && ./build/$fileNameWithoutExt.exe",
+        // "cpp": "cd $dir && clang++ $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c++1z && ./build/$fileNameWithoutExt.exe"
 
         // // win7设置
-        // "c": "cd $dir && clang $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c11 && $dir\\build\\$fileNameWithoutExt.exe",
-        // "cpp": "cd $dir && clang++ $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c++1z && $dir\\build\\$fileNameWithoutExt.exe"
+        "c": "cd $dir && clang $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c11 && $dir\\build\\$fileNameWithoutExt.exe",
+        "cpp": "cd $dir && clang++ $fileName -o ./build/$fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c++1z && $dir\\build\\$fileNameWithoutExt.exe"
     },
 
     "code-runner.saveFileBeforeRun": true,

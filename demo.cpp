@@ -1,41 +1,104 @@
 #include <iostream>
-#include "PyString.cpp"
 #include <list>
+#include <map>
 #include <vector>
 #include <memory>
 #include <sstream>
 
+#include "PyString.cpp"
+#include "tools.cpp"
+
 using namespace std;
+
+template <class T>
+T f(T i)
+{
+ 
+    std::cout << "is_integral int:" << std::is_integral<T>::value << std::endl;
+    std::cout << "type float:" << std::is_floating_point<T>::value << std::endl;
+
+    std::cout << "type point:" << std::is_pointer<T>::value << std::endl;
+
+    std::cout << "type string: " << std::is_same<T, std::string>::value << std::endl;
+    std::cout << "type string: " << std::is_same<T, char>::value << std::endl;
+
+    // static_assert(std::is_integral<T>::value, "Integral required.");  //静态断言(编译时断言检查)
+    return i;
+}
 
 
 int main(int argc, char const **argv)
 {
 
 
-    // for(auto elem: range(0, 10, 4)) {
+    // for(auto elem: range(0, 10, 2)) {
     //         cout << elem << " ";
-    //     }
+    // }
+    // cout << '\n';
 
 
+    // std::map<std::string, int> mData = {
+    //     {"A", 1},
+    //     {"B", 2},
+    //     {"c", 3}
+    // };
+    // // mData.insert(make_pair(1.2,2));
+    // print(mData);
 
 
-    PyString str = "hello world";
-    print(str.py_split("ll", 1));
+    // print(std::vector<char> {'A', 'B', 'C', 'D'});
+    // print(std::vector<std::string> {"AB", "CD", "EF"});
+    // print(std::vector<int> {1,2,3,4,5});
+    // print(std::vector<double> {1.1, 2.2, 3.3, 4.4, 5.5});
+    // print(std::vector<float> {1.1, 2.2, 3.3, 4.4, 5.5});
 
-    // cout << str.py_find("ll") << endl;
-    // cout << str.py_rfind("ll") << endl;
-    // cout << str.py_rfind("ll", 0, 2) << endl;
-    // cout << str.py_find("ll", 0, 4) << endl;
+    // PyString str = "hello world";
+    // cout << "find:" << str.py_find('l', 4) << endl;
+    // cout << "find:" << str.py_find("ll") << endl;
+    // cout << "find:" << str.py_find("ll", 3) << endl;
+    // cout << "rfind:" << str.py_rfind('l') << endl;
 
-    // cout << str.py_count("l") << endl;
+
+    // cout << "count:" << str.py_count('l') << endl;
+    // cout << "count:" << str.py_count("ll") << endl;
 
 
-    // cout << str.py_startswith("ll",2) << endl;
-    // cout << str.py_endswith("ll",0, -1) << endl;
+    // cout << "startswith:" << str.py_startswith('l') << endl;
+    // cout << "startswith:" << str.py_startswith("ll",2) << endl;
+    // cout << "startswith:" << str.py_endswith('l') << endl;
+    // cout << "endswith" << str.py_endswith("ll",0, -1) << endl;
 
+    
+    // cout << str.replace(str.begin(), str.begin() + 3, 4, 'a') << endl;
+    // cout << str.replace(0, 5, "A") << endl;
+    // cout << str.py_replace('o', 'l', 1) << endl;
+    // cout << str.py_replace("world", "python") << endl;
+
+
+    // PyString str1 = "llello worll";
+    // cout << "strip:" << str1.py_strip('l') << endl;
+    // cout << "strip:" << str1.py_lstrip('l') << endl;
+    // cout << "strip:" << str1.py_rstrip('l') << endl;
+    // cout << "strip:" << str1.py_strip("l") << endl;
+    // cout << "strip:" << str1.py_lstrip("ll") << endl;
+    // cout << "strip:" << str1.py_rstrip("ll") << endl;
     
 
 
+    
+
+    PyString str = "llhello worlldll";
+    // print(str.py_split('l'));
+    // print(str.py_split('l', 2));
+    // print(str.py_split("ll"));
+    // print(str.py_split("ll",2));
+
+
+    // print(str.py_rsplit('l'));
+    // print(str.py_rsplit('l', 2));
+    // print(str.py_rsplit("ll"));
+    // print(str.py_rsplit("ll",2));
+    // print(str.py_rsplit("lll"));
 
     //不支持占位符标识{0} {1}
     // cout << FormatString(" world!", "hello", 3.14) << endl;
@@ -49,35 +112,16 @@ int main(int argc, char const **argv)
 
 
 
-
-    cout << str.replace(str.begin(), str.begin() + 3, 4, 'a') << endl;
-    cout << str.replace(0, 5, "A") << endl;
-    cout << str.py_replace("l", "A") << endl;
     
 
-    cout << isalpha('c') << endl;
-    cout  << str.py_isalpha() << endl;
-    cout  << str.py_isdigit() << endl;
-    cout  << str.py_isalnum() << endl;
-    cout  << str.py_isspace() << endl;
-    cout << str << endl;
-
-    // PyString str = "hahchhhhhhh";
-    // cout << str.py_lstrip("h") << endl;
-    // cout << str.py_rstrip("h") << endl;
-    // cout << str.py_strip("h") << endl;
+    // cout << isalpha('c') << endl;
+    // cout  << str.py_isalpha() << endl;
+    // cout  << str.py_isdigit() << endl;
+    // cout  << str.py_isalnum() << endl;
+    // cout  << str.py_isspace() << endl;
     // cout << str << endl;
 
-    // std::string sr = str;
-    // cout << sr << endl;
 
-    // auto rev = str.split('h');
-    // cout << rev.size() << endl;
-    // // print(rev);
-    // for(auto elem: rev) {
-
-    //     cout << ":" << elem << endl;
-    // }
 
     return 0;
 }

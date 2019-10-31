@@ -1,9 +1,11 @@
 #include <iostream>
-#include "PyString.cpp"
 #include <list>
 #include <vector>
 #include <memory>
 #include <sstream>
+
+#include "tools.cpp"
+#include "PyString.cpp"
 
 using namespace std;
 
